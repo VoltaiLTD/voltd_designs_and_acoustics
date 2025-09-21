@@ -1,4 +1,5 @@
-import { Home, Ruler, VolumeX, Waves, PanelsTopLeft, PanelsRight, Sparkles } from "lucide-react";
+import { Home, Ruler, VolumeX, Waves, PanelsTopLeft, PanelRight, Sparkles } from "lucide-react";
+
 
 export type Service = {
   slug: string;
@@ -88,7 +89,7 @@ export const SERVICES: Service[] = [
   {
     slug: "installation-of-acp-and-wpc-panels",
     title: "Installation of ACP & WPC Panels",
-    icon: PanelsRight,
+    icon: PanelRight,
     teaser: "Precision installation for long-lasting performance.",
     summary: "Clean edges, correct tolerances, watertight details — per manufacturer spec.",
     bullets: ["Sub‑structure & fixings","Expansion & waterproofing","Safety & QA","Post‑install inspection"],
