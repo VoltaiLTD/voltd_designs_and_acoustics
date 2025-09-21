@@ -1,0 +1,1 @@
+export default function Page(){return <section className='section container'><h1>Get a Quote</h1><p className='text-white/70 mt-2'>Enter your project details and we’ll respond with pricing.</p></section>}
