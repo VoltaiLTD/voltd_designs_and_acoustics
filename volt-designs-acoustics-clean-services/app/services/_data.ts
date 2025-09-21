@@ -79,7 +79,7 @@ export const SERVICES: Service[] = [
     teaser: "Premium brands, fast delivery, expert guidance.",
     summary: "Curated ACP/WPC collections with durable finishes and warranties.",
     bullets: ["Wide colors & grains","Datasheets/certs","Volume pricing","After‑sales support"],
-    hero: "/products/perforated-acp-close.png",
+    hero: "/products/acp-panel-close.png",
     pricing: [
       { title: "ACP Panels", priceNGN: 48500, unit: "per m²", features: ["Exterior grade","Warranty"] },
       { title: "WPC Panels", priceNGN: 24000, unit: "per m²", features: ["Low maintenance","UV‑stable"], popular: true }
