@@ -1,1 +1,11 @@
-@tailwind base;@tailwind components;@tailwind utilities;:root{--gold:#D4AF37}html,body{background:#222;color:#fff;font-family:system-ui,ui-sans-serif} .container{max-width:80rem;margin:0 auto;padding:0 1rem} .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:1rem;padding:.75rem 1.25rem;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.08)} .btn-gold{background:var(--gold);color:#222} .btn-outline{border:1px solid #C0C0C0;color:#C0C0C0} .card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:1rem;padding:1.25rem} .section{padding:3.5rem 0} h1,h2,h3{font-weight:800}
+@tailwind base; @tailwind components; @tailwind utilities;
+html,body{background:#222222;color:white;font-family:Montserrat,ui-sans-serif,system-ui}
+.container{max-width:80rem;margin:0 auto;padding:0 1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:1rem;padding:.75rem 1.25rem;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.08);transition:transform .15s}
+.btn-gold{background:#D4AF37;color:#222222}
+.btn-outline{border:1px solid #C0C0C0;color:#C0C0C0}
+.card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:1rem;padding:1.25rem}
+.section{padding:3.5rem 0}
+h1,h2,h3{font-family:Poppins,ui-sans-serif,system-ui}
+h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:800}
+h2{font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800}
