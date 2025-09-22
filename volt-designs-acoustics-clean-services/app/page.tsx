@@ -6,7 +6,7 @@ export default function Home() {
       {/* BG video */}
       <video
         className="absolute inset-0 z-0 w-full h-full object-cover"
-        src="/videos/hero-1080.mp4"
+        src="/hero-1080.mp4"
         autoPlay
         muted
         loop
@@ -14,8 +14,8 @@ export default function Home() {
         poster="/hero-still-1.png"
         preload="metadata"
       >
-        <source src="/videos/hero-1080.webm" type="video/webm" />
-        <source src="/videos/hero-1080.mp4" type="video/mp4" />
+        <source src="/hero-1080.webm" type="video/webm" />
+        <source src="/hero-1080.mp4" type="video/mp4" />
       </video>
 
       {/* Gradient overlay above the video */}
