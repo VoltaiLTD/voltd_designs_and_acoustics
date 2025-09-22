@@ -1,45 +1,54 @@
-export type Material = {
+export type MATERIALS = {
   slug: string;
   name: string;
   description: string;
-  variations: { color: string; hex: string; image?: string }[];
+  images: string[]; // up to 8 image paths
 };
 
-export const MATERIALS: Material[] = [
+export const MATERIALS: MATERIALS[] = [
   {
-    slug: "acp-panels",
+    slug: "acp",
     name: "ACP Panels",
-    description:
-      "Aluminum Composite Panels available in metallic, matte, and custom CNC perforated finishes.",
-    variations: [
-      { color: "Silver Metallic", hex: "#C0C0C0" },
-      { color: "Charcoal Black", hex: "#222222" },
-      { color: "Champagne Gold", hex: "#D4AF37" },
-      { color: "Custom Perforated", hex: "#888888" },
+    description: "Durable exterior aluminum composite panels with multiple finishes.",
+    images: [
+      "/materials/acp/acp-1.jpg",
+      "/materials/acp/acp-2.jpg",
+      "/materials/acp/acp-3.jpg",
+      "/materials/acp/acp-4.jpg",
+      "/materials/acp/acp-5.jpg",
+      "/materials/acp/acp-6.jpg",
+      "/materials/acp/acp-7.jpg",
+      "/materials/acp/acp-8.jpg",
     ],
   },
   {
-    slug: "wpc-panels",
+    slug: "wpc",
     name: "WPC Panels",
-    description:
-      "Wood-Plastic Composite planks and panels that bring natural warmth with zero termite issues.",
-    variations: [
-      { color: "Teak", hex: "#8B4513" },
-      { color: "Walnut Brown", hex: "#5C4033" },
-      { color: "Natural Oak", hex: "#D2B48C" },
-      { color: "Ebony Dark", hex: "#2C2C2C" },
+    description: "Wood-plastic composites for walls and ceilings, natural textures.",
+    images: [
+      "/materials/wpc/wpc-1.jpg",
+      "/materials/wpc/wpc-2.jpg",
+      "/materials/wpc/wpc-3.jpg",
+      "/materials/wpc/wpc-4.jpg",
+      "/materials/wpc/wpc-5.jpg",
+      "/materials/wpc/wpc-6.jpg",
+      "/materials/wpc/wpc-7.jpg",
+      "/materials/wpc/wpc-8.jpg",
     ],
   },
   {
-    slug: "acoustic-materials",
+    slug: "acoustic",
     name: "Acoustic Materials",
-    description:
-      "Diffusers, absorbers, and reflectors to optimize sound clarity in studios, offices, and halls.",
-    variations: [
-      { color: "Quadratic Diffuser (White)", hex: "#F5F5F5" },
-      { color: "Wooden Slat Absorber", hex: "#C19A6B" },
-      { color: "Fabric Panel (Gray)", hex: "#808080" },
-      { color: "Reflector Finish", hex: "#A0522D" },
+    description: "Diffusers, absorbers and soundproofing panels for acoustic design.",
+    images: [
+      "/materials/acoustic/acoustic-1.jpg",
+      "/materials/acoustic/acoustic-2.jpg",
+      "/materials/acoustic/acoustic-3.jpg",
+      "/materials/acoustic/acoustic-4.jpg",
+      "/materials/acoustic/acoustic-5.jpg",
+      "/materials/acoustic/acoustic-6.jpg",
+      "/materials/acoustic/acoustic-7.jpg",
+      "/materials/acoustic/acoustic-8.jpg",
     ],
   },
 ];

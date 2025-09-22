@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { MATERIALS } from "../_data";
 
-export default function MaterialDetail({ params }: { params: { slug: string } }) {
+export default function MaterialPage({ params }: { params: { slug: string } }) {
   const mat = MATERIALS.find((m) => m.slug === params.slug);
   if (!mat) return notFound();
 
@@ -10,17 +10,17 @@ export default function MaterialDetail({ params }: { params: { slug: string } })
       <h1>{mat.name}</h1>
       <p className="text-white/70 mt-2 max-w-2xl">{mat.description}</p>
 
-      <div className="grid md:grid-cols-4 gap-4 mt-6">
-        {mat.variations.map((v) => (
+      <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-4 mt-6">
+        {mat.images.map((src, idx) => (
           <div
-            key={v.color}
-            className="card flex flex-col items-center justify-center text-center p-4"
+            key={idx}
+            className="w-full h-40 rounded-md overflow-hidden bg-black/20"
           >
-            <div
-              className="w-20 h-20 rounded-full border border-white/20 mb-3"
-              style={{ backgroundColor: v.hex }}
+            <img
+              src={src}
+              alt={`${mat.name} ${idx + 1}`}
+              className="object-cover w-full h-full"
             />
-            <h4 className="font-semibold text-sm">{v.color}</h4>
           </div>
         ))}
       </div>
