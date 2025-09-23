@@ -1,16 +1,17 @@
+// app/materials/_data.ts
+
 export type Material = {
-  slug: string;
+  slug: "acp" | "wpc" | "acoustic" | string;
   name: string;
   description: string;
-  images: string[];            // up to 8 image paths
-  // variations?: { color: string; hex: string; image?: string }[]; // optional, only if you need swatches
+  images: string[]; // up to 8 image paths under /public
 };
 
 export const MATERIALS: Material[] = [
   {
     slug: "acp",
     name: "ACP Panels",
-    description: "Durable exterior aluminum composite panels with multiple finishes.",
+    description: "Durable exterior aluminum composite panels with modern finishes.",
     images: [
       "/materials/acp/acp-1.jpg",
       "/materials/acp/acp-2.jpg",
@@ -25,7 +26,7 @@ export const MATERIALS: Material[] = [
   {
     slug: "wpc",
     name: "WPC Panels",
-    description: "Wood-plastic composites for walls and ceilings, natural textures.",
+    description: "Wood-plastic composites for walls and ceilings with natural textures.",
     images: [
       "/materials/wpc/wpc-1.jpg",
       "/materials/wpc/wpc-2.jpg",
@@ -40,7 +41,7 @@ export const MATERIALS: Material[] = [
   {
     slug: "acoustic",
     name: "Acoustic Materials",
-    description: "Diffusers, absorbers and soundproofing panels for acoustic design.",
+    description: "Diffusers, absorbers, reflectors and soundproofing panels.",
     images: [
       "/materials/acoustic/acoustic-1.jpg",
       "/materials/acoustic/acoustic-2.jpg",

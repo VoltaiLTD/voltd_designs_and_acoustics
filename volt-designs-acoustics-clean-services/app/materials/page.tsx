@@ -1,43 +1,47 @@
 // app/materials/page.tsx
 import Link from "next/link";
 import Image from "next/image";
-import { MATERIALS } from "@/lib/materials";
+import { MATERIALS } from "./_data";
 
 export const metadata = {
-  title: "Materials",
-  description: "Browse acoustic and façade materials.",
+  title: "Materials — Volt Designs & Acoustics",
+  description: "Explore ACP, WPC, and Acoustic materials with multiple images and finishes.",
 };
 
 export default function MaterialsPage() {
   return (
-    <main className="px-6 py-10 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-semibold">Materials</h1>
-      <div className="grid md:grid-cols-3 gap-6 mt-8">
-        {MATERIALS.map((mat) => (
-          <Link
-            key={mat.slug}
-            href={`/materials/${mat.slug}`}
-            className="rounded-2xl shadow p-4 hover:shadow-md transition"
-          >
-            <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden">
-              {mat.image ? (
+    <section className="section container">
+      <h1>Materials</h1>
+      <p className="text-white/70 mt-2 max-w-2xl">
+        Browse our ACP, WPC, and Acoustic products — each with multiple images and finishes.
+      </p>
+
+      <div className="grid md:grid-cols-3 gap-6 mt-6">
+        {MATERIALS.map((mat) => {
+          const preview = mat.images?.[0] ?? "/placeholder/material.jpg"; // safe fallback
+          return (
+            <Link
+              key={mat.slug}
+              href={`/materials/${mat.slug}`}
+              className="card hover:border-white/20 transition flex flex-col"
+            >
+              <div className="relative w-full h-40 rounded-md overflow-hidden bg-black/20">
                 <Image
-                  src={mat.image}
+                  src={preview}
                   alt={mat.name}
-                  width={800}
-                  height={450}
-                  className="w-full h-full object-cover"
-                  priority={false}
+                  fill
+                  className="object-cover"
                 />
-              ) : null}
-            </div>
-            <h2 className="mt-3 text-lg font-medium">{mat.name}</h2>
-            <p className="text-sm text-gray-600 mt-1 line-clamp-2">
-              {mat.description}
-            </p>
-          </Link>
-        ))}
+              </div>
+              <h3 className="font-semibold mt-3">{mat.name}</h3>
+              <p className="text-white/60 text-sm mt-1">{mat.description}</p>
+              <div className="mt-2 text-[color:var(--gold,#D4AF37)] text-sm">
+                View {mat.images?.length ?? 0} images →
+              </div>
+            </Link>
+          );
+        })}
       </div>
-    </main>
+    </section>
   );
 }
