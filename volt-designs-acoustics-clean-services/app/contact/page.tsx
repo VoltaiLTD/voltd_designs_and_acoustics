@@ -1,71 +1,36 @@
-import { NextRequest, NextResponse } from "next/server";
+import ContactForm from "@/components/ContactForm";
 
-function isValidEmail(v: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-}
-function clamp(str: string, max = 2000) {
-  return (str || "").toString().slice(0, max);
-}
+export default function ContactPage() {
+  return (
+    <section className="section container">
+      <h1>Contact Us</h1>
+      <p className="text-white/70 mt-2 max-w-2xl">
+        Have a project in mind? We’d love to help with design, materials, installation and acoustics.
+      </p>
 
-export async function POST(req: NextRequest) {
-  try {
-    const { name, email, phone, message, service } = await req.json();
-
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
-    }
-    if (!isValidEmail(email)) {
-      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
-    }
-
-    const apiKey = process.env.RESEND_API_KEY;
-    const to = process.env.CONTACT_TO_EMAIL;
-    const from = process.env.CONTACT_FROM_EMAIL;
-    if (!apiKey || !to || !from) {
-      return NextResponse.json({ error: "Server not configured" }, { status: 500 });
-    }
-
-    const subject = `New enquiry: ${service || "General"} — ${name}`;
-    const html = `
-      <div style="font-family:system-ui,Arial,sans-serif;font-size:14px;color:#111;line-height:1.5">
-        <h2 style="margin:0 0 6px">New service enquiry</h2>
-        <p><strong>Service:</strong> ${clamp(service ?? "", 120)}</p>
-        <p><strong>Name:</strong> ${clamp(name, 120)}</p>
-        <p><strong>Email:</strong> ${clamp(email, 120)}</p>
-        ${phone ? `<p><strong>Phone:</strong> ${clamp(phone, 40)}</p>` : ""}
-        <p style="margin:8px 0 4px"><strong>Message</strong></p>
-        <pre style="white-space:pre-wrap;margin:0;background:#f6f6f6;padding:10px;border-radius:8px">${clamp(
-          message,
-          4000
-        )}</pre>
-        <p style="color:#666;margin-top:16px">Sent from Volt Designs & Acoustics website</p>
+      <div className="grid md:grid-cols-3 gap-6 mt-6">
+        <div className="card space-y-2">
+          <h3 className="font-semibold">Reach us</h3>
+          <p>Email: <a className="underline" href="mailto:voltai.ltd@hotmail.com">voltai.ltd@hotmail.com</a></p>
+          <p>Phone/WhatsApp: <a className="underline" href="tel:+2347063859211">+234 706 385 9211</a></p>
+          <p className="text-sm text-white/70">Office/Showroom: Lekki County Homes, Ikota, Lagos, Nigeria</p>
+          <p className="text-sm text-white/70">Mon–Sat, 9:00–18:00 WAT</p>
+        </div>
+        <div className="card md:col-span-2">
+          <iframe
+            title="Volt Designs & Acoustics Location"
+            width="100%"
+            height="100%"
+            className="aspect-video w-full rounded-xl overflow-hidden border border-white/10"
+            src="https://www.google.com/maps?q=lekkicountyhomesikota,+Lagos&output=embed"
+          />
+        </div>
       </div>
-    `;
 
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        subject,
-        html,
-        reply_to: email
-      })
-    });
-
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("Resend send failed:", res.status, err);
-      return NextResponse.json({ error: "Email failed" }, { status: 500 });
-    }
-
-    return NextResponse.json({ ok: true });
-  } catch (e) {
-    console.error("CONTACT_FORM_ERROR", e);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
-  }
+      <div className="card mt-6">
+        <h3 className="font-semibold">Send us a message</h3>
+        <ContactForm /> {/* 👈 insert the client component */}
+      </div>
+    </section>
+  );
 }

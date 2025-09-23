@@ -1,186 +1,167 @@
 // app/services/_data.ts
-import { Home, Ruler, VolumeX, Waves, PanelsTopLeft, PanelsRight, Sparkles } from "lucide-react";
+import {
+  Home,
+  Ruler,
+  VolumeX,
+  Waves,
+  Sparkles,
+  PanelRight,
+} from "lucide-react";
+
+export type PricingPlan = {
+  name: string;
+  price: string;
+  features?: string[];
+};
+
+export type ServiceCTA = {
+  primaryText?: string;
+  primaryHref?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
+};
 
 export type Service = {
   slug: string;
-  title: string;
-  icon: React.ComponentType<{ className?: string }>;
-  teaser: string;
-  summary: string;
-  bullets: string[];
-  hero: string; // path in /public
-  pricing?: {
-    title: string;
-    priceNGN: number;
-    unit?: string;        // e.g., "per room", "per m²", "per door"
-    features: string[];
-    popular?: boolean;
-  }[];
-  cta?: {
-    primaryHref: string;
-    primaryText: string;
-    secondaryHref?: string;
-    secondaryText?: string;
-  };
+  name: string;                 // Short label for cards & fallbacks
+  description: string;          // Short description for cards
+  icon: any;                    // Lucide icon component
+
+  // Optional fields for the detail page:
+  title?: string;               // Display title (falls back to name)
+  hero?: string;                // /public/... image path for header
+  teaser?: string;              // Short meta/SEO
+  summary?: string;             // Longer intro (falls back to description)
+  bullets?: string[];           // “What’s Included”
+  pricing?: PricingPlan[];      // Optional pricing table
+  cta?: ServiceCTA;             // Optional CTAs
 };
 
 export const SERVICES: Service[] = [
   {
-    slug: "exterior-and-interior-design",
-    title: "Exterior & Interior Design",
+    slug: "interior-exterior-design",
+    name: "Exterior & Interior Design",
+    description:
+      "Custom concepts and finishes for residential, commercial, and hospitality spaces.",
     icon: Home,
-    teaser: "Concept-to-completion styling for façades and interiors.",
-    summary:
-      "We craft timeless spaces using ACP/WPC textures, lighting, and proportion. From residential to commercial, we align function with a premium aesthetic that reflects your brand.",
+    title: "Exterior & Interior Design",
+    hero: "/services/interior-exterior-hero.jpg",
     bullets: [
-      "Mood boards, material palettes & lighting plans",
-      "Façade concepts using ACP/WPC finishes",
-      "Space planning & 3D previews",
-      "On-site supervision & finishing schedules",
+      "Concept development & mood boards",
+      "Material & color specification (ACP/WPC/Acoustic)",
+      "Detail drawings & site supervision",
     ],
-    hero: "/services/exterior-interior.jpg",
-    pricing: [
-      {
-        title: "Concept Pack",
-        priceNGN: 250000,
-        unit: "per area",
-        features: ["2 concepts", "Material palette", "Basic mood board"],
-      },
-      {
-        title: "Design+",
-        priceNGN: 450000,
-        unit: "per area",
-        features: ["3 concepts", "Lighting layout", "Detailed finish schedule"],
-        popular: true,
-      },
-      {
-        title: "Executive",
-        priceNGN: 850000,
-        unit: "per area",
-        features: ["5 concepts", "Site supervision", "3D previews"],
-      },
-    ],
-    cta: { primaryHref: "/get-a-quote", primaryText: "Request a Design Quote", secondaryHref: "/portfolio", secondaryText: "See Portfolio" },
   },
   {
-    slug: "architectural-designs-and-3d-renders",
-    title: "Architectural Designs & 3D Renders",
+    slug: "architectural-designs-3d",
+    name: "Architectural Designs & 3D Renders",
+    description:
+      "Precision drawings and photorealistic 3D visuals to communicate your vision.",
     icon: Ruler,
-    teaser: "Permit-ready drawings & photo-realistic visuals.",
-    summary:
-      "Bring your vision to life with accurate drawings and cinematic 3D renders that communicate design intent clearly to stakeholders.",
+    title: "Architectural Designs & 3D Renders",
+    hero: "/services/architectural-3d-hero.jpg",
     bullets: [
-      "2D drawings (plans, elevations & sections)",
-      "High-quality 3D stills & walkthroughs",
-      "Cladding details for ACP/WPC",
-      "BOQ & material schedules",
+      "Plans, elevations & sections",
+      "Photoreal 3D renders & walkthroughs",
+      "Permit-ready documentation",
     ],
-    hero: "/services/architectural-3d.jpg",
-    pricing: [
-      { title: "2D Drawings", priceNGN: 380000, unit: "per project", features: ["Plans & elevations", "Sections", "PDF set"] },
-      { title: "3D Still Renders", priceNGN: 120000, unit: "per view", features: ["Photo-real lighting", "2 revisions"], popular: true },
-      { title: "3D Walkthrough", priceNGN: 750000, unit: "per minute", features: ["Storyboard", "Edited video"] },
-    ],
-    cta: { primaryHref: "/get-a-quote", primaryText: "Start a 3D Render" },
   },
   {
     slug: "soundproofing",
-    title: "Soundproofing",
+    name: "Soundproofing",
+    description:
+      "Noise isolation assemblies for studios, offices, and worship spaces.",
     icon: VolumeX,
-    teaser: "Block noise at the source with engineered assemblies.",
-    summary:
-      "We deliver proven isolation systems to keep external or room-to-room noise under control—for studios, offices, hospitality and home theatres.",
+    title: "Soundproofing",
+    hero: "/services/soundproofing-hero.jpg",
     bullets: [
-      "Walls, ceilings & floating floors",
-      "STC-rated doors & perimeter seals",
-      "Structure-borne vibration control",
-      "On-site testing & validation",
+      "Walls/ceilings/floors isolation",
+      "Doors, seals & gaskets",
+      "STC/NC targets & commissioning",
     ],
-    hero: "/services/soundproofing.jpg",
-    pricing: [
-      { title: "Room Pack", priceNGN: 680000, unit: "per room", features: ["Wall isolation", "Door seals", "Basic test"] },
-      { title: "Studio Pack", priceNGN: 1450000, unit: "per room", features: ["Walls/ceiling/floor", "STC door", "Advanced test"], popular: true },
-    ],
-    cta: { primaryHref: "/contact", primaryText: "Book a Site Assessment" },
   },
   {
-    slug: "acoustic-evaluation-design-and-installation",
-    title: "Acoustic Evaluation, Design & Installation",
+    slug: "acoustic-evaluation",
+    name: "Acoustic Evaluation, Design & Installation",
+    description:
+      "Professional room analysis and tuned treatment layouts for clarity and control.",
     icon: Waves,
-    teaser: "Tune your room for clarity, warmth and intelligibility.",
-    summary:
-      "From diagnosis to treatment, we improve reverberation, flutter echo and modal build-up using diffusers, absorbers and reflectors tailored to your space.",
+    title: "Acoustic Evaluation, Design & Installation",
+    hero: "/services/acoustic-design-hero.jpg",
     bullets: [
-      "Room response measurement (RT60, STI, modes)",
-      "Treatment schemes: absorbers, diffusers, reflectors",
-      "Custom PET felt & timber acoustic solutions",
-      "Clean, safe, on-schedule installation",
+      "Site measurement & RT60 assessment",
+      "Diffusers, absorbers & reflectors layout",
+      "Calibrated tuning & report",
     ],
-    hero: "/services/acoustics.jpg",
-    pricing: [
-      { title: "Assessment", priceNGN: 150000, unit: "per space", features: ["On-site tests", "Report + scheme"] },
-      { title: "Treatment Pack", priceNGN: 380000, unit: "per room", features: ["Panels + install", "Tuning"], popular: true },
-    ],
-    cta: { primaryHref: "/get-a-quote", primaryText: "Get Acoustic Proposal" },
   },
   {
-    slug: "sales-of-acp-and-wpc-panels",
-    title: "Sales of ACP & WPC Panels",
-    icon: PanelsTopLeft,
-    teaser: "Premium brands, fast delivery, expert guidance.",
-    summary:
-      "Choose from curated ACP/WPC collections with durable finishes and warranties. We help you match color, texture and profile to your design goals.",
-    bullets: [
-      "Wide color range & wood grains",
-      "Datasheets & certifications",
-      "Volume pricing & logistics",
-      "After-sales support",
-    ],
-    hero: "/services/sales.jpg",
-    pricing: [
-      { title: "ACP Panels", priceNGN: 28500, unit: "per m²", features: ["Exterior grade", "Warranty"] },
-      { title: "WPC Panels", priceNGN: 24000, unit: "per m²", features: ["Low maintenance", "UV-stable"], popular: true },
-    ],
-    cta: { primaryHref: "/products", primaryText: "Browse Products" },
-  },
-  {
-    slug: "installation-of-acp-and-wpc-panels",
-    title: "Installation of ACP & WPC Panels",
-    icon: PanelsRight,
-    teaser: "Precision installation for long-lasting performance.",
-    summary:
-      "Our trained crews deliver clean edges, correct tolerances and watertight performance—exactly as the manufacturer specifies.",
-    bullets: [
-      "Sub-structure & fixings per spec",
-      "Expansion gaps & waterproofing",
-      "Safety compliance & QA",
-      "Post-install inspection",
-    ],
-    hero: "/services/installation.jpg",
-    pricing: [
-      { title: "WPC Install", priceNGN: 12000, unit: "per m²", features: ["Subframe", "Fixings", "Finishing"] },
-      { title: "ACP Install", priceNGN: 18000, unit: "per m²", features: ["Framing", "Sealing", "Finishing"], popular: true },
-    ],
-    cta: { primaryHref: "/get-a-quote", primaryText: "Schedule Installation" },
-  },
-  {
-    slug: "cnc-designs-and-perforation",
-    title: "CNC Designs & Perforation",
+    slug: "sales-acp-wpc",
+    name: "Sales of ACP & WPC Panels",
+    description:
+      "High-quality panels in multiple textures, colors, and finishes.",
     icon: Sparkles,
-    teaser: "Custom patterns for screens, ceilings & brand features.",
-    summary:
-      "From parametric façades to logo walls, our CNC service fabricates intricate ACP/WPC patterns that are installation-ready.",
+    title: "Sales of ACP & WPC Panels",
+    hero: "/services/sales-acp-wpc-hero.jpg",
+  },
+  {
+    slug: "installation-acp-wpc",
+    name: "Installation of ACP & WPC Panels",
+    description:
+      "Seamless installation with durable substructures and clean detailing.",
+    icon: PanelRight,
+    title: "Installation of ACP & WPC Panels",
+    hero: "/services/installation-hero.jpg",
     bullets: [
-      "Vector cleanup & nesting for yield",
-      "Edge finishing & backing options",
-      "Perforation schedules for airflow/lighting",
-      "Rapid prototyping & sample approval",
+      "Aluminum sub-frames & waterproofing",
+      "CNC/perforated panel mounting",
+      "Warranty-backed installation",
     ],
-    hero: "/services/cnc.jpg",
+  },
+  {
+    slug: "cnc-designs",
+    name: "CNC Designs & Perforation",
+    description:
+      "Intricate perforations and custom patterns for facades and features.",
+    icon: Sparkles,
+    title: "CNC Designs & Perforation",
+    hero: "/services/cnc-hero.jpg",
+    bullets: [
+      "Custom perforation patterns",
+      "Accurate nesting & finishing",
+      "Facade screening & feature walls",
+    ],
+  },
+  {
+    slug: "fire-rating",
+    name: "Fire Rating Services",
+    description:
+      "We fire-rate fabrics, leathers, and wooden surfaces to international standards.",
+    icon: Sparkles,
+    title: "Fire Rating Services",
+    hero: "/services/fire-rating-hero.jpg", // optional image in /public/services/
+    summary:
+      "On-site application of fire-retardant treatments for fabrics, leather, and wood. "
+      + "We preserve aesthetics while reducing flammability, and we issue a certification report.",
+    bullets: [
+      "Surfaces: fabric, leather, wood & composites",
+      "Standards: NFPA 701 (USA), BS 476 Part 6 & 7 (UK), EN 13501-1 (EU)",
+      "On-site application & certification report",
+      "Aftercare guidance and maintenance schedule",
+    ],
     pricing: [
-      { title: "Standard Pattern", priceNGN: 45000, unit: "per panel", features: ["Catalog pattern", "Clean edges"] },
-      { title: "Custom Pattern", priceNGN: 95000, unit: "per panel", features: ["Client vector", "Sample & proof"], popular: true },
+      {
+        name: "Standard Fire-Rating Treatment",
+        price: "₦18,000 / m²",
+        features: [
+          "Single-pass or multi-pass as required",
+          "Certificate of conformity",
+          "Site protection & cleanup",
+        ],
+      },
     ],
-    cta: { primaryHref: "/get-a-quote", primaryText: "Request CNC Sample" },
+    cta: {
+      primaryText: "Get Fire-Rating Quote",
+      primaryHref: "/get-a-quote?service=fire-rating",
+    },
   },
 ];

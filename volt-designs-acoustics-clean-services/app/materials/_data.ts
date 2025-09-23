@@ -1,11 +1,12 @@
-export type MATERIALS = {
+export type Material = {
   slug: string;
   name: string;
   description: string;
-  images: string[]; // up to 8 image paths
+  images: string[];            // up to 8 image paths
+  // variations?: { color: string; hex: string; image?: string }[]; // optional, only if you need swatches
 };
 
-export const MATERIALS: MATERIALS[] = [
+export const MATERIALS: Material[] = [
   {
     slug: "acp",
     name: "ACP Panels",
