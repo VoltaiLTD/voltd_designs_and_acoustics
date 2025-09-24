@@ -4,5 +4,4 @@ const nextConfig = {
     serverComponentsExternalPackages: ["pdfkit"],
   },
 };
-
 export default nextConfig;
