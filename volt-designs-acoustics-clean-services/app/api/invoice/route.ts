@@ -1,7 +1,11 @@
+/// <reference types="pdfkit" />
+
 import { NextResponse } from "next/server";
-// FIX: Use a namespace import for compatibility with modern ECMcript modules.
-// This resolves the 'Import assignment cannot be used...' error (ts1202).
-import * as PDFDocument from "pdfkit";
+
+// FIX: Use CommonJS require() for robust compatibility with pdfkit.
+// This resolves the "expression is not constructable" build error on Vercel by
+// correctly importing the class constructor from the older module format.
+const PDFDocument = require("pdfkit");
 
 // pdfkit is a Node.js library, so we must use the Node runtime.
 export const runtime = "nodejs";
@@ -18,9 +22,8 @@ function streamToBuffer(doc: PDFKit.PDFDocument): Promise<Buffer> {
     doc.on("data", (chunk) => chunks.push(chunk));
     doc.on("error", (err) => reject(err));
     doc.on("end", () => {
-      // The type definitions for Buffer.concat are strict and expect Uint8Array[].
-      // We cast `chunks` to satisfy the type checker. This works because the Buffer
-      // class is a subclass of Uint8Array, so it's compatible at runtime.
+      // The type definitions for Buffer.concat can be strict.
+      // We cast `chunks` to satisfy the type checker as Buffer is compatible with Uint8Array.
       resolve(Buffer.concat(chunks as unknown as readonly Uint8Array[]));
     });
   });
@@ -30,10 +33,9 @@ export async function POST(req: Request) {
   try {
     const data = await req.json();
 
-    // 1. Create a new PDF document in memory
-    // FIX: When using a namespace import (`* as PDFDocument`), the constructor
-    // is on the `default` property of the imported object.
-    const doc = new (PDFDocument as any)({
+    // 1. Create a new PDF document in memory.
+    // This now works because require() loads the constructor correctly.
+    const doc = new PDFDocument({
       size: "A4",
       margin: 40,
       info: {
