@@ -1,1 +1,48 @@
-@tailwind base;@tailwind components;@tailwind utilities;:root{--gold:#D4AF37}html,body{background:#222;color:#fff;font-family:system-ui,ui-sans-serif} .container{max-width:80rem;margin:0 auto;padding:0 1rem} .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:1rem;padding:.75rem 1.25rem;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.08)} .btn-gold{background:var(--gold);color:#222} .btn-outline{border:1px solid #C0C0C0;color:#C0C0C0} .card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:1rem;padding:1.25rem} .section{padding:3.5rem 0} h1,h2,h3{font-weight:800}
+/* Tailwind layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom font (example, replace with your preferred font) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #0b0b0b; /* Dark background to fit your site style */
+  color: white;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Buttons */
+.btn {
+  @apply px-5 py-2 rounded-lg font-medium transition inline-flex items-center justify-center;
+}
+.btn-gold {
+  @apply bg-yellow-500 hover:bg-yellow-600 text-black;
+}
+.btn-outline {
+  @apply border border-white/40 text-white hover:border-yellow-500 hover:text-yellow-500;
+}
+
+/* Cards */
+.card {
+  @apply bg-black/40 border border-white/10 rounded-xl p-5;
+}
+
+/* Section spacing */
+.section {
+  @apply py-12;
+}
+
+/* Utility for gold text */
+.text-gold {
+  color: var(--gold, #D4AF37);
+}
