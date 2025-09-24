@@ -8,14 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/pdfkit": "^0.17.3",
     "lucide-react": "0.452.0",
     "next": "^14.2.32",
     "openai": "^5.22.0",
+    "pdfkit": "^0.17.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/node": "20.14.10",
+    "@types/node": "^20.14.10",
     "@types/react": "18.2.79",
     "autoprefixer": "10.4.19",
     "postcss": "8.4.39",
