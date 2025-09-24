@@ -18,7 +18,7 @@ function streamToBuffer(doc: PDFKit.PDFDocument): Promise<Buffer> {
     doc.on("data", (chunk) => chunks.push(chunk));
     doc.on("error", (err) => reject(err));
     doc.on("end", () => {
-      // FIX: The type definitions for Buffer.concat are strict and expect Uint8Array[].
+      // The type definitions for Buffer.concat are strict and expect Uint8Array[].
       // We cast `chunks` to satisfy the type checker. This works because the Buffer
       // class is a subclass of Uint8Array, so it's compatible at runtime.
       resolve(Buffer.concat(chunks as unknown as readonly Uint8Array[]));
@@ -31,7 +31,9 @@ export async function POST(req: Request) {
     const data = await req.json();
 
     // 1. Create a new PDF document in memory
-    const doc = new PDFDocument({
+    // FIX: When using a namespace import (`* as PDFDocument`), the constructor
+    // is on the `default` property of the imported object.
+    const doc = new (PDFDocument as any)({
       size: "A4",
       margin: 40,
       info: {
