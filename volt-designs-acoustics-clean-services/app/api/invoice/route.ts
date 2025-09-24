@@ -2,9 +2,8 @@
 
 import { NextResponse } from "next/server";
 
-// FIX: Use CommonJS require() for robust compatibility with pdfkit.
-// This resolves the "expression is not constructable" build error on Vercel by
-// correctly importing the class constructor from the older module format.
+// Use CommonJS require() for robust compatibility with pdfkit.
+// This resolves build errors on Vercel by correctly importing the class constructor.
 const PDFDocument = require("pdfkit");
 
 // pdfkit is a Node.js library, so we must use the Node runtime.
@@ -17,14 +16,11 @@ export const runtime = "nodejs";
  */
 function streamToBuffer(doc: PDFKit.PDFDocument): Promise<Buffer> {
   return new Promise((resolve, reject) => {
-    // pdfkit streams data in chunks of Buffers
     const chunks: Buffer[] = [];
     doc.on("data", (chunk) => chunks.push(chunk));
     doc.on("error", (err) => reject(err));
     doc.on("end", () => {
-      // The type definitions for Buffer.concat can be strict.
-      // We cast `chunks` to satisfy the type checker as Buffer is compatible with Uint8Array.
-      resolve(Buffer.concat(chunks as unknown as readonly Uint8Array[]));
+      resolve(Buffer.concat(chunks));
     });
   });
 }
@@ -34,7 +30,6 @@ export async function POST(req: Request) {
     const data = await req.json();
 
     // 1. Create a new PDF document in memory.
-    // This now works because require() loads the constructor correctly.
     const doc = new PDFDocument({
       size: "A4",
       margin: 40,
@@ -74,7 +69,8 @@ export async function POST(req: Request) {
     const pdfBuffer = await bufferPromise;
 
     // 6. Create the Blob for the response.
-    // The Node.js Buffer must be converted to a standard Uint8Array for the Web API `Blob` constructor.
+    // FIX: The Node.js Buffer MUST be converted to a standard Uint8Array
+    // for the Web API `Blob` constructor to satisfy TypeScript's strict type checking.
     const blob = new Blob([new Uint8Array(pdfBuffer)], {
       type: "application/pdf",
     });
