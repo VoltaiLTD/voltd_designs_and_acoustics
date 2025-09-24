@@ -152,10 +152,10 @@ export default function ServiceDetail({
               Prefer WhatsApp or email? We’ll get right back.
             </p>
             <div className="mt-3 space-y-2 text-sm">
-              <a href="mailto:hello@volt-acoustics.com" className="text-white/80 underline">
+              <a href="mailto:voltai.ltd@hotmail.com" className="text-white/80 underline">
                 hello@volt-acoustics.com
               </a>
-              <div className="text-white/80">+234 800 000 0000</div>
+              <div className="text-white/80">+234 706 385 9211</div>
             </div>
           </div>
         </aside>
