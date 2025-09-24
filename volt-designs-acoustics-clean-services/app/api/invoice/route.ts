@@ -3,8 +3,10 @@
 import { NextResponse } from "next/server";
 
 // Use CommonJS require() for robust compatibility with pdfkit.
-// This resolves build errors on Vercel by correctly importing the class constructor.
-const PDFDocument = require("pdfkit");
+const PDFDocumentImport = require("pdfkit");
+// Vercel's build environment can sometimes wrap CJS modules. This line ensures
+// we get the actual constructor, whether it's the default export or the module itself.
+const PDFDocument = PDFDocumentImport.default || PDFDocumentImport;
 
 // pdfkit is a Node.js library, so we must use the Node runtime.
 export const runtime = "nodejs";
@@ -69,7 +71,7 @@ export async function POST(req: Request) {
     const pdfBuffer = await bufferPromise;
 
     // 6. Create the Blob for the response.
-    // FIX: The Node.js Buffer MUST be converted to a standard Uint8Array
+    // The Node.js Buffer MUST be converted to a standard Uint8Array
     // for the Web API `Blob` constructor to satisfy TypeScript's strict type checking.
     const blob = new Blob([new Uint8Array(pdfBuffer)], {
       type: "application/pdf",
