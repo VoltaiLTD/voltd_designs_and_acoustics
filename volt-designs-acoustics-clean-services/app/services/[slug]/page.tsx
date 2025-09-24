@@ -153,7 +153,7 @@ export default function ServiceDetail({
             </p>
             <div className="mt-3 space-y-2 text-sm">
               <a href="mailto:voltai.ltd@hotmail.com" className="text-white/80 underline">
-                hello@volt-acoustics.com
+                voltai.ltd@hotmail.com
               </a>
               <div className="text-white/80">+234 706 385 9211</div>
             </div>
